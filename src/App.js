@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
-import Gameboard from "./components/Displays";
+import { Gameboard } from "./components/Displays";
 
 function App() {
   return (

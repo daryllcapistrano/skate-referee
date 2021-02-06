@@ -1,3 +1,4 @@
 import Gameboard from "./Gameboard";
+import Scoreboard from "./Scoreboard";
 
-export default Gameboard;
+export { Gameboard, Scoreboard };
