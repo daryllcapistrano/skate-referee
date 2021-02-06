@@ -15,17 +15,20 @@ const useStyles = makeStyles({
   card: {
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-evenly",
+    textAlign: "center",
     margin: "0 auto",
-    height: "300px",
-    width: "300px",
+    padding: "1em",
+    // fixed height for consistent 300px width and height
+    height: "268px",
+    width: "268px",
   },
 });
 
 export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
-
-  const classes = useStyles();
+  const [disabled, setDisabled] = useState(false);
 
   const landedCounter = () => {
     console.log("congrats u landed it");
@@ -33,17 +36,19 @@ export default function Gameboard() {
   };
 
   const missedPlayerOne = () => {
-    if (playerOne === 5) {
-      console.log("you lost");
-      return null;
+    if (playerOne === 4) {
+      setPlayerOne(playerOne + 1);
+      setDisabled(true);
+      console.log("PLAYER 1 LOST");
     } else {
       setPlayerOne(playerOne + 1);
     }
   };
   const missedPlayerTwo = () => {
-    if (playerTwo === 5) {
-      console.log("you lost");
-      return null;
+    if (playerTwo === 4) {
+      setPlayerTwo(playerTwo + 1);
+      setDisabled(true);
+      console.log("PLAYER 2 LOST");
     } else {
       setPlayerTwo(playerTwo + 1);
     }
@@ -54,6 +59,7 @@ export default function Gameboard() {
       return null;
     } else {
       setPlayerOne(playerOne - 1);
+      setDisabled(false);
     }
   };
 
@@ -62,8 +68,11 @@ export default function Gameboard() {
       return null;
     } else {
       setPlayerTwo(playerTwo - 1);
+      setDisabled(false);
     }
   };
+
+  const classes = useStyles();
 
   return (
     <Container className={classes.root} disableGutters={true}>
@@ -76,15 +85,21 @@ export default function Gameboard() {
       >
         <Grid item xs={12} sm={6}>
           <Card className={classes.card}>
-            PLAYER 1
+            <div>PLAYER 1</div>
             <Scoreboard playerOne={playerOne} />
-            <Button onClick={landedCounter} color="primary" variant="outlined">
+            <Button
+              onClick={landedCounter}
+              color="primary"
+              variant="outlined"
+              disabled={disabled}
+            >
               landed
             </Button>
             <Button
               onClick={missedPlayerOne}
               color="secondary"
               variant="outlined"
+              disabled={disabled}
             >
               missed
             </Button>
@@ -95,15 +110,21 @@ export default function Gameboard() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Card className={classes.card}>
-            PLAYER 2
+            <div>PLAYER 2</div>
             <Scoreboard playerTwo={playerTwo} />
-            <Button onClick={landedCounter} color="primary" variant="outlined">
+            <Button
+              onClick={landedCounter}
+              color="primary"
+              variant="outlined"
+              disabled={disabled}
+            >
               landed
             </Button>
             <Button
               onClick={missedPlayerTwo}
               color="secondary"
               variant="outlined"
+              disabled={disabled}
             >
               missed
             </Button>
