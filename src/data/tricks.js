@@ -1,0 +1,26 @@
+export const trick = [
+  "kickflip",
+  "backside kickflip",
+  "frontside kickflip",
+  "backside 360 kickflip",
+  "frontside 360 kickflip",
+  "varialflip",
+  "hardflip",
+  "360 flip",
+  "heelflip",
+  "backside heelflip",
+  "frontside heelflip",
+  "backside 360 heelflip",
+  "frontside 360 heelflip",
+  "varial heelflip",
+  "inward heelflip",
+  "laserflip",
+  "backside pop shuvit",
+  "backside 360 pop shuvit",
+  "backside bigspin",
+  "frontside pop shuvit",
+  "frontside 360 pop shuvit",
+  "frontside bigspin",
+];
+
+export const stance = ["regular", "switch", "fakie", "nollie"];

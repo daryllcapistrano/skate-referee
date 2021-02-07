@@ -3,7 +3,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 export default function Header() {
   return (
-    <AppBar position="static" elevation={0}>
+    <AppBar position="static" elevation={0} color="secondary">
       <Toolbar>
         <h1>SKATE REFEREE</h1>
       </Toolbar>
