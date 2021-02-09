@@ -4,23 +4,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Scoreboard } from "./index";
 import { trick, stance } from "../../data/tricks";
 
-// *
-//  Seperate into own function so user can press button for new trick
-//
-// const getTrickSuggestion = () => {
-//   let getRandomTrick = Math.floor(Math.random() * trick.length);
-//   let getRandomStance = Math.floor(Math.random() * stance.length);
-//   let trickSuggestion = stance[getRandomStance] + " " + trick[getRandomTrick];
-//   return trickSuggestion;
-// };
-//
-//
-// *
-
 export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
   const [disabled, setDisabled] = useState(false);
+  const [playerTurn, setPlayerTurn] = useState("playerOne");
+  const [suggestedTrick, setSuggestedTrick] = useState(" ");
+
+  function GetTrickSuggestion() {
+    let getRandomTrick = Math.floor(Math.random() * trick.length);
+    let getRandomStance = Math.floor(Math.random() * stance.length);
+    let trickSuggestion = stance[getRandomStance] + " " + trick[getRandomTrick];
+    setSuggestedTrick(trickSuggestion);
+  }
 
   const landedTrick = () => {
     console.log("congrats u landed it");
@@ -30,6 +26,7 @@ export default function Gameboard() {
   const resetGame = () => {
     setPlayerOne(0);
     setPlayerTwo(0);
+    setDisabled(false);
   };
 
   const missedPlayerOne = () => {
@@ -39,6 +36,8 @@ export default function Gameboard() {
       console.log("PLAYER 1 LOST");
     } else {
       setPlayerOne(playerOne + 1);
+      setPlayerTurn("playerTwo");
+      console.log(playerTurn);
     }
   };
   const missedPlayerTwo = () => {
@@ -48,6 +47,7 @@ export default function Gameboard() {
       console.log("PLAYER 2 LOST");
     } else {
       setPlayerTwo(playerTwo + 1);
+      setPlayerTurn("playerOne");
     }
   };
 
@@ -69,14 +69,6 @@ export default function Gameboard() {
     }
   };
 
-  const getTrickSuggestion = () => {
-    let getRandomTrick = Math.floor(Math.random() * trick.length);
-    let getRandomStance = Math.floor(Math.random() * stance.length);
-    let trickSuggestion = stance[getRandomStance] + " " + trick[getRandomTrick];
-    console.log(trickSuggestion);
-    return trickSuggestion;
-  };
-
   const classes = useStyles();
 
   return (
@@ -93,12 +85,13 @@ export default function Gameboard() {
         <Button
           color="default"
           variant="contained"
-          onClick={getTrickSuggestion}
+          onClick={GetTrickSuggestion}
           // disabled={!disabled}
         >
           get new trick
         </Button>
       </div>
+      <div>{suggestedTrick}</div>
       <Grid
         container
         className={classes.container}
