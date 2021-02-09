@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Container, Grid } from "@material-ui/core";
+import { Button, Container, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Scoreboard } from "./index";
 import { trick, stance } from "../../data/tricks";
@@ -73,25 +73,6 @@ export default function Gameboard() {
 
   return (
     <Container className={classes.root} disableGutters={true}>
-      <div style={{ textAlign: `center`, padding: `2em` }}>
-        <Button
-          color="default"
-          variant="contained"
-          onClick={resetGame}
-          // disabled={!disabled}
-        >
-          Start New Game
-        </Button>
-        <Button
-          color="default"
-          variant="contained"
-          onClick={GetTrickSuggestion}
-          // disabled={!disabled}
-        >
-          get new trick
-        </Button>
-      </div>
-      <div>{suggestedTrick}</div>
       <Grid
         container
         className={classes.container}
@@ -100,54 +81,68 @@ export default function Gameboard() {
         alignItems="center"
       >
         <Grid item xs={12} sm={6}>
-          <Card className={classes.card}>
-            <div>PLAYER 1</div>
-            <Scoreboard playerOne={playerOne} />
-            <Button
-              color="primary"
-              variant="contained"
-              disabled={disabled}
-              onClick={landedTrick}
-            >
-              landed
-            </Button>
-            <Button
-              color="secondary"
-              variant="contained"
-              disabled={disabled}
-              onClick={missedPlayerOne}
-            >
-              missed
-            </Button>
-            <Button color="default" variant="contained" onClick={undoPlayerOne}>
-              undo
-            </Button>
-          </Card>
+          <div>PLAYER 1</div>
+          <Scoreboard playerOne={playerOne} />
+          <Button
+            color="primary"
+            variant="contained"
+            disabled={disabled}
+            onClick={landedTrick}
+          >
+            landed
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            disabled={disabled}
+            onClick={missedPlayerOne}
+          >
+            missed
+          </Button>
+          <Button color="default" variant="contained" onClick={undoPlayerOne}>
+            undo
+          </Button>
+          <div>PLAYER 2</div>
+          <Scoreboard playerTwo={playerTwo} />
+          <Button
+            color="primary"
+            variant="contained"
+            disabled={disabled}
+            onClick={landedTrick}
+          >
+            landed
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            disabled={disabled}
+            onClick={missedPlayerTwo}
+          >
+            missed
+          </Button>
+          <Button color="default" variant="contained" onClick={undoPlayerTwo}>
+            undo
+          </Button>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Card className={classes.card}>
-            <div>PLAYER 2</div>
-            <Scoreboard playerTwo={playerTwo} />
+          <div style={{ textAlign: `center` }}>
             <Button
-              color="primary"
+              color="default"
               variant="contained"
-              disabled={disabled}
-              onClick={landedTrick}
+              onClick={resetGame}
+              // disabled={!disabled}
             >
-              landed
+              Start New Game
             </Button>
             <Button
-              color="secondary"
+              color="default"
               variant="contained"
-              disabled={disabled}
-              onClick={missedPlayerTwo}
+              onClick={GetTrickSuggestion}
             >
-              missed
+              get new trick
             </Button>
-            <Button color="default" variant="contained" onClick={undoPlayerTwo}>
-              undo
-            </Button>
-          </Card>
+          </div>
+          <div>{suggestedTrick}</div>
         </Grid>
       </Grid>
     </Container>
@@ -156,12 +151,14 @@ export default function Gameboard() {
 
 const useStyles = makeStyles({
   root: {
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    background:
+      "linear-gradient(to top, #2C5364, #203A43, #0F2027)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+
     maxWidth: "100%",
   },
   container: {
     height: "100%",
-    minHeight: "calc(100vh - 180px)",
+    minHeight: "100vh",
   },
   card: {
     display: "flex",
@@ -170,7 +167,5 @@ const useStyles = makeStyles({
     textAlign: "center",
     margin: "0 auto",
     padding: "1em",
-    height: "268px",
-    width: "268px",
   },
 });
