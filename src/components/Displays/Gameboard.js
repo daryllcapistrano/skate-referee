@@ -25,19 +25,7 @@ export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
   const [disabled, setDisabled] = useState(false);
-  // const [playerTurn, setPlayerTurn] = useState("playerOne");
   const [suggestedTrick, setSuggestedTrick] = useState(" ");
-
-  // const notify = () =>
-  //   toast("Sick! You Landed It!", {
-  //     position: "top-center",
-  //     autoClose: 2500,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //   });
 
   function GetTrickSuggestion() {
     let getRandomTrick = Math.floor(Math.random() * trick.length);
@@ -115,6 +103,7 @@ export default function Gameboard() {
               label="Skater One"
               placeholder="enter name"
               fullWidth={true}
+              color="secondary"
             />
             <div className={styles.buttonWrapper}>
               <IconButton
@@ -149,6 +138,7 @@ export default function Gameboard() {
               label="Skater Two"
               placeholder="enter name"
               fullWidth={true}
+              color="secondary"
             />
             <Box className={styles.buttonWrapper}>
               <IconButton
@@ -229,7 +219,7 @@ const useStyles = makeStyles({
     alignSelf: `baseline`,
   },
   container: {
-    backgroundColor: `orange`,
+    backgroundColor: `gray`,
     padding: `2em 1em`,
   },
 });
