@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, Container, Grid, TextField } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  TextField,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Scoreboard } from "./index";
 import { trick, stance } from "../../data/tricks";
@@ -89,105 +96,104 @@ export default function Gameboard() {
         alignItems="center"
       >
         <Grid item xs={12} sm={6}>
-          <Container className={styles.container}>
-            <TextField
-              id="player-one"
-              label="player one"
-              placeholder="enter name"
-              variant="outlined"
-              fullWidth={true}
-            />
-
-            <Scoreboard playerOne={playerOne} />
-            <div className={styles.buttonWrapper}>
+          <Container>
+            <div style={{ display: `flex`, justifyContent: `space-around` }}>
               <Button
-                color="primary"
+                color="default"
                 variant="contained"
-                disabled={disabled}
-                onClick={landedTrick}
-                startIcon={<FaCheck />}
+                onClick={resetGame}
+                startIcon={<FaStar />}
+                size="small"
               >
-                landed
-              </Button>
-              <Button
-                color="secondary"
-                variant="contained"
-                disabled={disabled}
-                onClick={missedPlayerOne}
-                startIcon={<FaTimesCircle />}
-              >
-                missed
+                Start New Game
               </Button>
               <Button
                 color="default"
                 variant="contained"
-                onClick={undoPlayerOne}
-                startIcon={<FaUndo />}
+                onClick={GetTrickSuggestion}
+                startIcon={<FaRegQuestionCircle />}
+                size="small"
               >
-                undo
+                Random Trick
               </Button>
+            </div>
+            <div
+              style={{ height: `50px`, textAlign: `center`, marginTop: `1em` }}
+            >
+              {suggestedTrick}
+            </div>
+          </Container>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Container className={styles.container}>
+            <TextField
+              id="player-one"
+              label="Skater One"
+              placeholder="enter name"
+              fullWidth={true}
+            />
+            <Scoreboard playerOne={playerOne} />
+            <div className={styles.buttonWrapper}>
+              <IconButton
+                color="primary"
+                variant="contained"
+                disabled={disabled}
+                onClick={landedTrick}
+              >
+                <FaCheck />
+              </IconButton>
+              <IconButton
+                color="secondary"
+                variant="contained"
+                disabled={disabled}
+                onClick={missedPlayerOne}
+              >
+                <FaTimesCircle />
+              </IconButton>
+              <IconButton
+                color="default"
+                variant="contained"
+                onClick={undoPlayerOne}
+              >
+                <FaUndo />
+              </IconButton>
             </div>
           </Container>
           <Container className={styles.container}>
             <TextField
               id="player-two"
-              label="player two"
+              label="Skate Two"
               placeholder="enter name"
-              variant="outlined"
               fullWidth={true}
             />
 
             <Scoreboard playerTwo={playerTwo} />
-            <div className={styles.buttonWrapper}>
-              <Button
+            <Box className={styles.buttonWrapper}>
+              <IconButton
                 color="primary"
                 variant="contained"
                 disabled={disabled}
                 onClick={landedTrick}
-                startIcon={<FaCheck />}
               >
-                landed
-              </Button>
-              <Button
+                <FaCheck />
+              </IconButton>
+              <IconButton
                 color="secondary"
                 variant="contained"
                 disabled={disabled}
                 onClick={missedPlayerTwo}
-                startIcon={<FaTimesCircle />}
               >
-                missed
-              </Button>
-              <Button
+                <FaTimesCircle />
+              </IconButton>
+              <IconButton
                 color="default"
                 variant="contained"
                 onClick={undoPlayerTwo}
-                startIcon={<FaUndo />}
               >
-                undo
-              </Button>
-            </div>
+                <FaUndo />
+              </IconButton>
+            </Box>
           </Container>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <div style={{ textAlign: `center` }}>
-            <div style={{ height: `50px` }}>{suggestedTrick}</div>
-            <Button
-              color="default"
-              variant="contained"
-              onClick={resetGame}
-              startIcon={<FaStar />}
-            >
-              Start New Game
-            </Button>
-            <Button
-              color="default"
-              variant="contained"
-              onClick={GetTrickSuggestion}
-              startIcon={<FaRegQuestionCircle />}
-            >
-              Random Trick
-            </Button>
-          </div>
         </Grid>
       </Grid>
     </Container>
@@ -198,7 +204,12 @@ const useStyles = makeStyles({
   root: {
     maxWidth: "100%",
   },
-  buttonWrapper: { display: `flex`, justifyContent: `space-between` },
+  buttonWrapper: {
+    display: `flex`,
+    justifyContent: `space-around`,
+    margin: `0 auto`,
+    width: `60%`,
+  },
   gridContainer: {
     height: "100%",
     minHeight: "100vh",
