@@ -8,6 +8,8 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// import { toast } from "react-toastify";
+import { NotifyLanded, NotifyBailed } from "../ToastNotifications/toastOptions";
 import { Scoreboard } from "./index";
 import { trick, stance } from "../../data/tricks";
 
@@ -23,8 +25,19 @@ export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
   const [disabled, setDisabled] = useState(false);
-  const [playerTurn, setPlayerTurn] = useState("playerOne");
+  // const [playerTurn, setPlayerTurn] = useState("playerOne");
   const [suggestedTrick, setSuggestedTrick] = useState(" ");
+
+  // const notify = () =>
+  //   toast("Sick! You Landed It!", {
+  //     position: "top-center",
+  //     autoClose: 2500,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //   });
 
   function GetTrickSuggestion() {
     let getRandomTrick = Math.floor(Math.random() * trick.length);
@@ -34,7 +47,7 @@ export default function Gameboard() {
   }
 
   const landedTrick = () => {
-    console.log("congrats u landed it");
+    NotifyLanded();
     return null;
   };
 
@@ -51,8 +64,7 @@ export default function Gameboard() {
       console.log("PLAYER 1 LOST");
     } else {
       setPlayerOne(playerOne + 1);
-      setPlayerTurn("playerTwo");
-      console.log(playerTurn);
+      NotifyBailed();
     }
   };
   const missedPlayerTwo = () => {
@@ -62,7 +74,7 @@ export default function Gameboard() {
       console.log("PLAYER 2 LOST");
     } else {
       setPlayerTwo(playerTwo + 1);
-      setPlayerTurn("playerOne");
+      NotifyBailed();
     }
   };
 
@@ -95,44 +107,15 @@ export default function Gameboard() {
         justify="center"
         alignItems="center"
       >
-        <Grid item xs={12} sm={6}>
-          <Container>
-            <div style={{ display: `flex`, justifyContent: `space-around` }}>
-              <Button
-                color="default"
-                variant="contained"
-                onClick={resetGame}
-                startIcon={<FaStar />}
-                size="small"
-              >
-                Start New Game
-              </Button>
-              <Button
-                color="default"
-                variant="contained"
-                onClick={GetTrickSuggestion}
-                startIcon={<FaRegQuestionCircle />}
-                size="small"
-              >
-                Random Trick
-              </Button>
-            </div>
-            <div
-              style={{ height: `50px`, textAlign: `center`, marginTop: `1em` }}
-            >
-              {suggestedTrick}
-            </div>
-          </Container>
-        </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item className={styles.gridItem} xs={12} sm={6}>
           <Container className={styles.container}>
+            <Scoreboard playerOne={playerOne} />
             <TextField
               id="player-one"
               label="Skater One"
               placeholder="enter name"
               fullWidth={true}
             />
-            <Scoreboard playerOne={playerOne} />
             <div className={styles.buttonWrapper}>
               <IconButton
                 color="primary"
@@ -160,14 +143,13 @@ export default function Gameboard() {
             </div>
           </Container>
           <Container className={styles.container}>
+            <Scoreboard playerTwo={playerTwo} />
             <TextField
               id="player-two"
-              label="Skate Two"
+              label="Skater Two"
               placeholder="enter name"
               fullWidth={true}
             />
-
-            <Scoreboard playerTwo={playerTwo} />
             <Box className={styles.buttonWrapper}>
               <IconButton
                 color="primary"
@@ -195,6 +177,35 @@ export default function Gameboard() {
             </Box>
           </Container>
         </Grid>
+        <Grid item className={styles.gridItem} xs={12} sm={6}>
+          <Container>
+            <div
+              style={{ height: `50px`, textAlign: `center`, marginTop: `1em` }}
+            >
+              {suggestedTrick}
+            </div>
+            <div style={{ display: `flex`, justifyContent: `space-around` }}>
+              <Button
+                color="default"
+                variant="contained"
+                onClick={resetGame}
+                startIcon={<FaStar />}
+                size="small"
+              >
+                Start New Game
+              </Button>
+              <Button
+                color="default"
+                variant="contained"
+                onClick={GetTrickSuggestion}
+                startIcon={<FaRegQuestionCircle />}
+                size="small"
+              >
+                Random Trick
+              </Button>
+            </div>
+          </Container>
+        </Grid>
       </Grid>
     </Container>
   );
@@ -207,22 +218,18 @@ const useStyles = makeStyles({
   buttonWrapper: {
     display: `flex`,
     justifyContent: `space-around`,
-    margin: `0 auto`,
+    marginTop: `2em`,
     width: `60%`,
   },
   gridContainer: {
     height: "100%",
     minHeight: "100vh",
   },
-  container: {
-    marginTop: `4em`,
+  gridItem: {
+    alignSelf: `baseline`,
   },
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    textAlign: "center",
-    margin: "0 auto",
-    padding: "1em",
+  container: {
+    backgroundColor: `orange`,
+    padding: `2em 1em`,
   },
 });
