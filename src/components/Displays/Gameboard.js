@@ -8,31 +8,18 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// import { toast } from "react-toastify";
+import TrickSuggestion from "../../utils/getTrickSuggestion";
 import { NotifyLanded, NotifyBailed } from "../ToastNotifications/toastOptions";
 import { Scoreboard } from "./index";
-import { trick, stance } from "../../data/tricks";
 
-import {
-  FaCheck,
-  FaTimesCircle,
-  FaUndo,
-  FaStar,
-  FaRegQuestionCircle,
-} from "react-icons/fa";
+import { FaCheck, FaTimesCircle, FaUndo, FaStar } from "react-icons/fa";
 
 export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
   const [disabled, setDisabled] = useState(false);
-  const [suggestedTrick, setSuggestedTrick] = useState(" ");
-
-  function GetTrickSuggestion() {
-    let getRandomTrick = Math.floor(Math.random() * trick.length);
-    let getRandomStance = Math.floor(Math.random() * stance.length);
-    let trickSuggestion = stance[getRandomStance] + " " + trick[getRandomTrick];
-    setSuggestedTrick(trickSuggestion);
-  }
+  const [playerOneName, setPlayerOneName] = useState("");
+  const [playerTwoName, setPlayerTwoName] = useState("");
 
   const landedTrick = () => {
     NotifyLanded();
@@ -88,13 +75,7 @@ export default function Gameboard() {
 
   return (
     <Container className={styles.root} disableGutters={true}>
-      <Grid
-        container
-        className={styles.gridContainer}
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
+      <Grid container className={styles.gridContainer} direction="row">
         <Grid item className={styles.gridItem} xs={12} sm={6}>
           <Container className={styles.container}>
             <Scoreboard playerOne={playerOne} />
@@ -104,7 +85,9 @@ export default function Gameboard() {
               placeholder="enter name"
               fullWidth={true}
               color="secondary"
+              onChange={(event) => setPlayerOneName(event.target.value)}
             />
+            <div>{playerOneName}</div>
             <div className={styles.buttonWrapper}>
               <IconButton
                 color="primary"
@@ -136,10 +119,12 @@ export default function Gameboard() {
             <TextField
               id="player-two"
               label="Skater Two"
-              placeholder="enter name"
+              placeholder={"enter name"}
               fullWidth={true}
               color="secondary"
+              onChange={(event) => setPlayerTwoName(event.target.value)}
             />
+            <div>{playerOneName}</div>
             <Box className={styles.buttonWrapper}>
               <IconButton
                 color="primary"
@@ -169,11 +154,7 @@ export default function Gameboard() {
         </Grid>
         <Grid item className={styles.gridItem} xs={12} sm={6}>
           <Container>
-            <div
-              style={{ height: `50px`, textAlign: `center`, marginTop: `1em` }}
-            >
-              {suggestedTrick}
-            </div>
+            <TrickSuggestion />
             <div style={{ display: `flex`, justifyContent: `space-around` }}>
               <Button
                 color="default"
@@ -184,7 +165,7 @@ export default function Gameboard() {
               >
                 Start New Game
               </Button>
-              <Button
+              {/* <Button
                 color="default"
                 variant="contained"
                 onClick={GetTrickSuggestion}
@@ -192,7 +173,7 @@ export default function Gameboard() {
                 size="small"
               >
                 Random Trick
-              </Button>
+              </Button> */}
             </div>
           </Container>
         </Grid>
