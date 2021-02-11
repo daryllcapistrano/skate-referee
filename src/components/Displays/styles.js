@@ -5,8 +5,6 @@ export const useStyles = makeStyles({
     display: `flex`,
     flexDirection: `column`,
     justifyContent: `space-between`,
-    backgroundColor: `#17255A`,
-    color: `#F5E2C8`,
     height: `calc(100vh - 100px)`,
   },
 });
