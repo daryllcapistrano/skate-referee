@@ -15,17 +15,16 @@ export default function TrickSuggestion() {
   }
 
   return (
-    <div>
-      <div>{suggestedTrick}</div>
+    <>
       <Button
         color="default"
-        variant="contained"
         onClick={GetTrickSuggestion}
         startIcon={<FaRegQuestionCircle />}
         size="small"
       >
         Random Trick
       </Button>
-    </div>
+      <div>{suggestedTrick}</div>
+    </>
   );
 }

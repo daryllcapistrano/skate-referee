@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export const NotifyLanded = () =>
+export const Landed = () =>
   toast.success("Sick! You Landed It!", {
     position: "top-center",
     autoClose: 2500,
@@ -11,7 +11,7 @@ export const NotifyLanded = () =>
     progress: undefined,
   });
 
-export const NotifyBailed = () =>
+export const Bailed = () =>
   toast.error("Bummer! You Bailed It!", {
     position: "top-center",
     autoClose: 2500,

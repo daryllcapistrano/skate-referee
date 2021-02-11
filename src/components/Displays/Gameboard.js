@@ -7,23 +7,24 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useStyles } from "./styles";
-import { NotifyLanded, NotifyBailed } from "../ToastNotifications/toastOptions";
 import { Scoreboard } from "./index";
 import TrickSuggestion from "../../utils/getTrickSuggestion";
+import { Landed, Bailed } from "../ToastNotifications/toastOptions";
 
 import { FaCheck, FaTimesCircle, FaUndo, FaStar } from "react-icons/fa";
 
 export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
-  const [playerOneName, setPlayerOneName] = useState("");
-  const [playerTwoName, setPlayerTwoName] = useState("");
+  const [playerOneName, setPlayerOneName] = useState("Player One");
+  const [playerTwoName, setPlayerTwoName] = useState("Player Two");
   const [disabled, setDisabled] = useState(false);
+  const [winner, setWinner] = useState(null);
 
   const styles = useStyles();
 
   const landedTrick = () => {
-    NotifyLanded();
+    Landed();
     return null;
   };
 
@@ -31,26 +32,27 @@ export default function Gameboard() {
     setPlayerOne(0);
     setPlayerTwo(0);
     setDisabled(false);
+    setWinner(null);
   };
 
   const missedPlayerOne = () => {
     if (playerOne === 4) {
       setPlayerOne(playerOne + 1);
       setDisabled(true);
-      console.log("PLAYER 1 LOST");
+      setWinner(playerTwoName + " won!");
     } else {
       setPlayerOne(playerOne + 1);
-      NotifyBailed();
+      Bailed();
     }
   };
   const missedPlayerTwo = () => {
     if (playerTwo === 4) {
       setPlayerTwo(playerTwo + 1);
       setDisabled(true);
-      console.log("PLAYER 2 LOST");
+      setWinner(playerOneName + " won!");
     } else {
       setPlayerTwo(playerTwo + 1);
-      NotifyBailed();
+      Bailed();
     }
   };
 
@@ -74,92 +76,96 @@ export default function Gameboard() {
 
   return (
     <Container className={styles.root} disableGutters={true}>
-      <Grid container direction="row">
-        <Grid item className={styles.menu} xs={12} sm={6}>
-          <TrickSuggestion />
-          <Button
-            color="default"
-            variant="contained"
-            onClick={resetGame}
-            startIcon={<FaStar />}
-            size="small"
-          >
-            Start New Game
-          </Button>
-        </Grid>
-        <Grid item className={styles.item} xs={12} sm={6}>
-          <Scoreboard playerOne={playerOne} />
-          <TextField
-            id="player-one"
-            label="Skater One"
-            placeholder="enter name"
-            fullWidth={true}
-            color="secondary"
-            onChange={(event) => setPlayerOneName(event.target.value)}
-          />
-          <h2>{playerOneName}</h2>
-          <Container className={styles.buttonWrapper}>
-            <IconButton
-              color="primary"
-              variant="contained"
-              disabled={disabled}
-              onClick={landedTrick}
-            >
-              <FaCheck />
-            </IconButton>
-            <IconButton
+      <div
+        style={{
+          display: `flex`,
+          flexDirection: `column`,
+          justifyContent: `space-around`,
+          minHeight: `200px`,
+          padding: `1em`,
+        }}
+      >
+        <Button
+          color="default"
+          onClick={resetGame}
+          startIcon={<FaStar />}
+          size="small"
+        >
+          New Game
+        </Button>
+        <TrickSuggestion />
+      </div>
+      <div style={{ minHeight: `100px` }}> {winner}</div>
+      <Container id="playerOne">
+        <Grid container>
+          <Grid item xs={6}>
+            <TextField
+              id="player-one"
+              label="Skater One"
+              placeholder="enter name"
               color="secondary"
-              variant="contained"
-              disabled={disabled}
-              onClick={missedPlayerOne}
-            >
-              <FaTimesCircle />
-            </IconButton>
-            <IconButton
-              color="default"
-              variant="contained"
-              onClick={undoPlayerOne}
-            >
-              <FaUndo />
-            </IconButton>
-          </Container>
-          <Scoreboard playerTwo={playerTwo} />
-          <TextField
-            id="player-two"
-            label="Skater Two"
-            placeholder={"enter name"}
-            fullWidth={true}
-            color="secondary"
-            onChange={(event) => setPlayerTwoName(event.target.value)}
-          />
-          <h2>{playerTwoName}</h2>
-          <Container className={styles.buttonWrapper}>
-            <IconButton
-              color="primary"
-              variant="contained"
-              disabled={disabled}
-              onClick={landedTrick}
-            >
-              <FaCheck />
-            </IconButton>
-            <IconButton
-              color="secondary"
-              variant="contained"
-              disabled={disabled}
-              onClick={missedPlayerTwo}
-            >
-              <FaTimesCircle />
-            </IconButton>
-            <IconButton
-              color="default"
-              variant="contained"
-              onClick={undoPlayerTwo}
-            >
-              <FaUndo />
-            </IconButton>
-          </Container>
+              onChange={(event) => setPlayerOneName(event.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Scoreboard playerOne={playerOne} />
+          </Grid>
         </Grid>
-      </Grid>
+        <IconButton
+          color="primary"
+          variant="contained"
+          disabled={disabled}
+          onClick={landedTrick}
+        >
+          <FaCheck />
+        </IconButton>
+        <IconButton
+          color="secondary"
+          variant="contained"
+          disabled={disabled}
+          onClick={missedPlayerOne}
+        >
+          <FaTimesCircle />
+        </IconButton>
+        <IconButton color="default" variant="contained" onClick={undoPlayerOne}>
+          <FaUndo />
+        </IconButton>
+      </Container>
+      <Container id="playerTwo">
+        <Grid container>
+          <Grid item xs={6}>
+            <TextField
+              id="player-two"
+              label="Skater Two"
+              placeholder={"enter name"}
+              color="secondary"
+              onChange={(event) => setPlayerTwoName(event.target.value)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Scoreboard playerTwo={playerTwo} />
+          </Grid>
+        </Grid>
+        <IconButton
+          color="primary"
+          variant="contained"
+          disabled={disabled}
+          onClick={landedTrick}
+        >
+          <FaCheck />
+        </IconButton>
+        <IconButton
+          color="secondary"
+          variant="contained"
+          disabled={disabled}
+          onClick={missedPlayerTwo}
+        >
+          <FaTimesCircle />
+        </IconButton>
+        <IconButton color="default" variant="contained" onClick={undoPlayerTwo}>
+          <FaUndo />
+        </IconButton>
+      </Container>
     </Container>
   );
 }
