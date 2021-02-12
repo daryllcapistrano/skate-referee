@@ -1,25 +1,30 @@
 import { useState } from "react";
-import { Button, Chip, Container, Divider, TextField } from "@material-ui/core";
+import { Chip, Container, Divider, TextField } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { Scoreboard } from "./index";
+import { trick, stance } from "../../data/tricks";
 import TrickSuggestion from "../../utils/getTrickSuggestion";
 import { Landed, Bailed } from "../ToastNotifications/toastOptions";
+import Announcer from "./Announcer";
 
-import { FaStar } from "react-icons/fa";
+// import { FaStar } from "react-icons/fa";
 
 export default function Gameboard() {
-  const [playerOne, setPlayerOne] = useState(0);
-  const [playerTwo, setPlayerTwo] = useState(0);
   const [playerOneName, setPlayerOneName] = useState("Player One");
   const [playerTwoName, setPlayerTwoName] = useState("Player Two");
+  const [suggestedTrick, setSuggestedTrick] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [playerOne, setPlayerOne] = useState(0);
+  const [playerTwo, setPlayerTwo] = useState(0);
   const [winner, setWinner] = useState(null);
 
   const styles = useStyles();
 
-  const landedTrick = () => {
-    Landed();
-    return null;
+  const getTrickSuggestion = () => {
+    let getRandomTrick = Math.floor(Math.random() * trick.length);
+    let getRandomStance = Math.floor(Math.random() * stance.length);
+    let trickSuggestion = stance[getRandomStance] + " " + trick[getRandomTrick];
+    setSuggestedTrick(trickSuggestion);
   };
 
   const resetGame = () => {
@@ -27,6 +32,12 @@ export default function Gameboard() {
     setPlayerTwo(0);
     setDisabled(false);
     setWinner(null);
+    setSuggestedTrick(null);
+  };
+
+  const landedTrick = () => {
+    Landed();
+    return null;
   };
 
   const missedPlayerOne = () => {
@@ -72,27 +83,19 @@ export default function Gameboard() {
 
   return (
     <Container className={styles.root} disableGutters={true}>
-      <div
-        style={{
-          display: `flex`,
-          flexDirection: `column`,
-          justifyContent: `space-around`,
-          padding: `1em`,
-        }}
-      >
-        <Button
-          color="default"
-          onClick={resetGame}
-          startIcon={<FaStar />}
-          size="small"
-        >
-          New Game
-        </Button>
-        <TrickSuggestion />
-      </div>
+      <Container className={styles.wrapper}>
+        <Announcer winner={winner} />
+        <Divider />
+        <Container style={{ height: `50px`, backgroundColor: `gray` }}>
+          {suggestedTrick}
+        </Container>
+        <TrickSuggestion
+          resetGame={resetGame}
+          getTrickSuggestion={getTrickSuggestion}
+        />
+      </Container>
       <Divider />
-      <div> {winner}</div>
-      <Container id="playerOne">
+      <Container id="playerOne" className={styles.wrapper}>
         <TextField
           id="player-one"
           label="Skater One"
@@ -128,7 +131,7 @@ export default function Gameboard() {
         />
       </Container>
       <Divider />
-      <Container id="playerTwo">
+      <Container id="playerTwo" className={styles.wrapper}>
         <TextField
           id="player-two"
           label="Skater Two"
@@ -163,6 +166,7 @@ export default function Gameboard() {
           clickable
         />
       </Container>
+      <Divider />
     </Container>
   );
 }

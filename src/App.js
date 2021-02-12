@@ -20,10 +20,10 @@ export default function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
+      <ToastContainer />
       <CssBaseline />
       <Router>
         <Header />
-        <ToastContainer />
         <Switch>
           <Route path="/home">
             <Gameboard />

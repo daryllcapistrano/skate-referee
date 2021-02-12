@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 export const Landed = () =>
   toast.success("Sick! You Landed It!", {
     position: "top-center",
-    autoClose: 2500,
-    hideProgressBar: false,
+    autoClose: 2000,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
@@ -14,8 +14,8 @@ export const Landed = () =>
 export const Bailed = () =>
   toast.error("Bummer! You Bailed It!", {
     position: "top-center",
-    autoClose: 2500,
-    hideProgressBar: false,
+    autoClose: 2000,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
