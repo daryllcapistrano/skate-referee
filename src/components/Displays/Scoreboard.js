@@ -1,4 +1,4 @@
-export default function ScoreBoard(props) {
+export default function Scoreboard(props) {
   if (props.playerOne === 0 || props.playerTwo === 0) {
     return <p>_ _ _ _ _</p>;
   }

@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Chip, Container, Divider, TextField } from "@material-ui/core";
-import { useStyles } from "./styles";
-import { Scoreboard } from "./index";
+import { makeStyles } from "@material-ui/core/styles";
 import { trick, stance } from "../../data/tricks";
-import TrickSuggestion from "../../utils/getTrickSuggestion";
-import { Landed, Bailed } from "../ToastNotifications/toastOptions";
-import Announcer from "./Announcer";
-
-// import { FaStar } from "react-icons/fa";
+import { Landed, Bailed } from "../ToastOptions";
+import { Announcer, Scoreboard, Trick } from "../Displays";
+import Menu from "../Menu";
 
 export default function Gameboard() {
   const [playerOneName, setPlayerOneName] = useState("Player One");
@@ -83,18 +80,9 @@ export default function Gameboard() {
 
   return (
     <Container className={styles.root} disableGutters={true}>
-      <Container className={styles.wrapper}>
-        <Announcer winner={winner} />
-        <Divider />
-        <Container style={{ height: `50px`, backgroundColor: `gray` }}>
-          {suggestedTrick}
-        </Container>
-        <TrickSuggestion
-          resetGame={resetGame}
-          getTrickSuggestion={getTrickSuggestion}
-        />
-      </Container>
-      <Divider />
+      <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
+      <Announcer winner={winner} />
+      <Trick suggestedTrick={suggestedTrick} />
       <Container id="playerOne" className={styles.wrapper}>
         <TextField
           id="player-one"
@@ -170,3 +158,14 @@ export default function Gameboard() {
     </Container>
   );
 }
+
+const useStyles = makeStyles({
+  root: {
+    display: `flex`,
+    flexDirection: `column`,
+    height: `calc(100vh - 100px)`,
+  },
+  wrapper: {
+    padding: `2em`,
+  },
+});

@@ -1,4 +1,5 @@
-import Gameboard from "./Gameboard";
+import Announcer from "./Announcer";
 import Scoreboard from "./Scoreboard";
+import Trick from "./Trick";
 
-export { Gameboard, Scoreboard };
+export { Announcer, Scoreboard, Trick };
