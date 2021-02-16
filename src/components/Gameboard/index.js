@@ -1,10 +1,18 @@
 import { useState } from "react";
-import { Box, Chip, Container, TextField } from "@material-ui/core";
+import {
+  Box,
+  Chip,
+  Container,
+  TextField,
+  InputAdornment,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { trick, stance } from "../../data/tricks";
 import { Landed, Bailed } from "../ToastOptions";
 import { Announcer } from "../Displays";
 import Menu from "../Menu";
+import { FaUser } from "react-icons/fa";
+import { grey } from "@material-ui/core/colors";
 
 export default function Gameboard() {
   const [playerOneName, setPlayerOneName] = useState("Player One");
@@ -94,102 +102,123 @@ export default function Gameboard() {
   return (
     <Container className={styles.root} disableGutters={true}>
       <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
-
       <Announcer
         playerOne={playerOne}
+        playerOneName={playerOneName}
         playerTwo={playerTwo}
+        playerTwoName={playerTwoName}
         winner={winner}
         playerTurn={playerTurn}
         suggestedTrick={suggestedTrick}
       />
-
-      <div>
-        <Container id="playerOne" className={styles.wrapper}>
-          <TextField
-            id="player-one"
-            label="Player 1"
-            placeholder="Enter Name"
-            variant="filled"
-            color="primary"
-            margin="normal"
-            fullWidth={true}
-            onChange={(event) => setPlayerOneName(event.target.value)}
+      <Box
+        id="playerOne"
+        margin={2}
+        padding={2}
+        bgcolor={grey.A400}
+        borderRadius={8}
+      >
+        <TextField
+          id="player-one"
+          placeholder="Enter Player One's Name"
+          variant="filled"
+          color="primary"
+          margin="normal"
+          fullWidth={true}
+          onChange={(event) => setPlayerOneName(event.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <FaUser />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <Box
+          display="inline-flex"
+          justifyContent="space-evenly"
+          width="100%"
+          mt="1.5em"
+        >
+          <Chip
+            variant="outlined"
+            size="medium"
+            label="LAND"
+            disabled={disabled}
+            onClick={landedPlayerOne}
+            clickable
           />
-          <Box
-            display="inline-flex"
-            justifyContent="space-evenly"
-            width="100%"
-            mt="1em"
-          >
-            <Chip
-              variant="outlined"
-              size="medium"
-              label="LANDED"
-              disabled={disabled}
-              onClick={landedPlayerOne}
-              clickable
-            />
-            <Chip
-              variant="outlined"
-              size="medium"
-              label="BAILED"
-              disabled={disabled}
-              onClick={missedPlayerOne}
-              clickable
-            />
-            <Chip
-              variant="outlined"
-              size="medium"
-              label="UNDO"
-              onClick={undoPlayerOne}
-              clickable
-            />
-          </Box>
-        </Container>
-
-        <Container id="playerTwo" className={styles.wrapper}>
-          <TextField
-            id="player-two"
-            label="Player Two"
-            placeholder="Enter Name"
-            variant="filled"
-            color="primary"
-            margin="normal"
-            fullWidth={true}
-            onChange={(event) => setPlayerTwoName(event.target.value)}
+          <Chip
+            variant="outlined"
+            size="medium"
+            label="BAIL"
+            disabled={disabled}
+            onClick={missedPlayerOne}
+            clickable
           />
-          <Box
-            display="inline-flex"
-            justifyContent="space-evenly"
-            width="100%"
-            mt="1em"
-          >
-            <Chip
-              variant="outlined"
-              size="medium"
-              label="LANDED"
-              disabled={disabled}
-              onClick={landedPlayerTwo}
-              clickable
-            />
-            <Chip
-              variant="outlined"
-              size="medium"
-              label="BAILED"
-              disabled={disabled}
-              onClick={missedPlayerTwo}
-              clickable
-            />
-            <Chip
-              variant="outlined"
-              size="medium"
-              label="UNDO"
-              onClick={undoPlayerTwo}
-              clickable
-            />
-          </Box>
-        </Container>
-      </div>
+          <Chip
+            variant="outlined"
+            size="medium"
+            label="UNDO"
+            onClick={undoPlayerOne}
+            clickable
+          />
+        </Box>
+      </Box>
+      <Box
+        id="playerTwo"
+        margin={2}
+        padding={2}
+        bgcolor={grey.A400}
+        borderRadius={8}
+      >
+        <TextField
+          id="player-two"
+          placeholder="Enter Player Two's Name"
+          variant="filled"
+          color="primary"
+          margin="normal"
+          fullWidth={true}
+          onChange={(event) => setPlayerTwoName(event.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <FaUser />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <Box
+          display="inline-flex"
+          justifyContent="space-evenly"
+          width="100%"
+          mt="1.5em"
+        >
+          <Chip
+            variant="outlined"
+            size="medium"
+            label="LAND"
+            disabled={disabled}
+            onClick={landedPlayerTwo}
+            clickable
+          />
+          <Chip
+            variant="outlined"
+            size="medium"
+            label="BAIL"
+            disabled={disabled}
+            onClick={missedPlayerTwo}
+            clickable
+          />
+          <Chip
+            variant="outlined"
+            size="medium"
+            label="UNDO"
+            onClick={undoPlayerTwo}
+            clickable
+          />
+        </Box>
+      </Box>
     </Container>
   );
 }
@@ -198,9 +227,7 @@ const useStyles = makeStyles({
   root: {
     display: `flex`,
     flexDirection: `column`,
+    justifyContent: `space-around`,
     height: `calc(100vh - 100px)`,
-  },
-  wrapper: {
-    padding: `1em`,
   },
 });

@@ -9,6 +9,9 @@ export default function Announcer(props) {
       justifyContent="center"
       alignItems="center"
       bgcolor={grey[50]}
+      height="20em"
+      margin={2}
+      borderRadius={4}
     >
       <Box display="flex" flexDirection="column" color={grey[900]}>
         <div>{props.winner} is the winner</div>
@@ -17,7 +20,9 @@ export default function Announcer(props) {
       </Box>
       <Box color={grey[900]}>
         <Scoreboard playerOne={props.playerOne} />
-        <div>versus</div>
+        <div>
+          {props.playerOneName} versus {props.playerTwoName}
+        </div>
         <Scoreboard playerTwo={props.playerTwo} />
       </Box>
     </Box>
