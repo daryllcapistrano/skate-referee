@@ -2,7 +2,7 @@
 // import { trick, stance } from "../data/tricks";
 import { Box, Button } from "@material-ui/core";
 
-import { FaRegQuestionCircle, FaStar } from "react-icons/fa";
+import { FaRandom, FaStar } from "react-icons/fa";
 
 const Menu = (props) => {
   return (
@@ -20,11 +20,10 @@ const Menu = (props) => {
       >
         New Game
       </Button>
-
       <Button
         color="default"
         onClick={() => props.getTrickSuggestion()}
-        startIcon={<FaRegQuestionCircle />}
+        startIcon={<FaRandom />}
         size="small"
       >
         Random Trick
