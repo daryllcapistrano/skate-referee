@@ -1,5 +1,3 @@
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import Header from "./components/Header";
 import Gameboard from "./components/Gameboard";
 import { ToastContainer } from "react-toastify";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";

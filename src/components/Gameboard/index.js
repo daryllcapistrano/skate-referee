@@ -1,30 +1,21 @@
 import { useState } from "react";
-import {
-  Box,
-  Chip,
-  Container,
-  TextField,
-  InputAdornment,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Box, Chip, Container, TextField } from "@material-ui/core";
 import { trick, stance } from "../../data/tricks";
 import { Landed, Bailed } from "../ToastOptions";
 import { Announcer } from "../Displays";
 import Menu from "../Menu";
-import { FaUser } from "react-icons/fa";
+
 import { grey } from "@material-ui/core/colors";
 
 export default function Gameboard() {
-  const [playerOneName, setPlayerOneName] = useState("Player One");
-  const [playerTwoName, setPlayerTwoName] = useState("Player Two");
-  const [suggestedTrick, setSuggestedTrick] = useState(null);
-  const [disabled, setDisabled] = useState(false);
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
+  const [playerOneName, setPlayerOneName] = useState("Player One");
+  const [playerTwoName, setPlayerTwoName] = useState("Player Two");
+  const [playerTurn, setPlayerTurn] = useState(playerOneName);
+  const [suggestedTrick, setSuggestedTrick] = useState(null);
+  const [disabled, setDisabled] = useState(false);
   const [winner, setWinner] = useState(null);
-  const [playerTurn, setPlayerTurn] = useState("p1");
-
-  const styles = useStyles();
 
   const getTrickSuggestion = () => {
     let getRandomTrick = Math.floor(Math.random() * trick.length);
@@ -39,17 +30,17 @@ export default function Gameboard() {
     setDisabled(false);
     setWinner(null);
     setSuggestedTrick(null);
-    setPlayerTurn("p1");
+    setPlayerTurn(playerOneName);
   };
 
   const landedPlayerOne = () => {
-    setPlayerTurn("p2");
+    setPlayerTurn(playerTwoName);
     Landed();
     return null;
   };
 
   const landedPlayerTwo = () => {
-    setPlayerTurn("p1");
+    setPlayerTurn(playerOneName);
     Landed();
     return null;
   };
@@ -61,7 +52,7 @@ export default function Gameboard() {
       setWinner(playerTwoName + " won!");
     } else {
       setPlayerOne(playerOne + 1);
-      setPlayerTurn("p2");
+      setPlayerTurn(playerTwoName);
       Bailed();
     }
   };
@@ -72,7 +63,7 @@ export default function Gameboard() {
       setWinner(playerOneName + " won!");
     } else {
       setPlayerTwo(playerTwo + 1);
-      setPlayerTurn("p1");
+      setPlayerTurn(playerOneName);
       Bailed();
     }
   };
@@ -83,7 +74,7 @@ export default function Gameboard() {
     } else {
       setPlayerOne(playerOne - 1);
       setDisabled(false);
-      setPlayerTurn("p1");
+      setPlayerTurn(playerOneName);
       setWinner(null);
     }
   };
@@ -94,13 +85,13 @@ export default function Gameboard() {
     } else {
       setPlayerTwo(playerTwo - 1);
       setDisabled(false);
-      setPlayerTurn("p2");
+      setPlayerTurn(playerTwoName);
       setWinner(null);
     }
   };
 
   return (
-    <Container className={styles.root} disableGutters={true}>
+    <Container disableGutters={true}>
       <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
       <Announcer
         playerOne={playerOne}
@@ -126,13 +117,6 @@ export default function Gameboard() {
           margin="normal"
           fullWidth={true}
           onChange={(event) => setPlayerOneName(event.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <FaUser />
-              </InputAdornment>
-            ),
-          }}
         />
         <Box
           display="inline-flex"
@@ -180,13 +164,6 @@ export default function Gameboard() {
           margin="normal"
           fullWidth={true}
           onChange={(event) => setPlayerTwoName(event.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <FaUser />
-              </InputAdornment>
-            ),
-          }}
         />
         <Box
           display="inline-flex"
@@ -222,12 +199,3 @@ export default function Gameboard() {
     </Container>
   );
 }
-
-const useStyles = makeStyles({
-  root: {
-    display: `flex`,
-    flexDirection: `column`,
-    justifyContent: `space-around`,
-    height: `calc(100vh - 100px)`,
-  },
-});
