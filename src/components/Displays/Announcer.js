@@ -1,4 +1,5 @@
 import { Box } from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
 import Scoreboard from "./Scoreboard";
 
 export default function Announcer(props) {
@@ -7,12 +8,14 @@ export default function Announcer(props) {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      mt="2em"
-      height="10em"
-      bgcolor="#f0f0f0"
+      bgcolor={grey[50]}
     >
-      <Box color="text.primary">{props.winner}</Box>
-      <Box>
+      <Box display="flex" flexDirection="column" color={grey[900]}>
+        <div>{props.winner} is the winner</div>
+        <div>{props.playerTurn}'s turn</div>
+        <div>{props.suggestedTrick}</div>
+      </Box>
+      <Box color={grey[900]}>
         <Scoreboard playerOne={props.playerOne} />
         <div>versus</div>
         <Scoreboard playerTwo={props.playerTwo} />

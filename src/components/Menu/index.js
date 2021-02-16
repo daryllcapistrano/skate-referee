@@ -10,7 +10,7 @@ const Menu = (props) => {
       display="inline-flex"
       justifyContent="space-evenly"
       width="100%"
-      mt="2em"
+      my="2em"
     >
       <Button
         color="default"
