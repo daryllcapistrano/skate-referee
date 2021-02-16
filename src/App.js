@@ -5,22 +5,25 @@ import { ToastContainer } from "react-toastify";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-// import "./App.css";
-
-import "react-toastify/dist/ReactToastify.css";
-// minified version is also included
-// import 'react-toastify/dist/ReactToastify.min.css';
+import "react-toastify/dist/ReactToastify.min.css";
+import { grey } from "@material-ui/core/colors";
 
 export default function App() {
   const darkTheme = createMuiTheme({
     palette: {
       type: "dark",
+      text: {
+        primary: grey[50],
+      },
+      background: {
+        default: grey[900],
+      },
     },
   });
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <ToastContainer role="alert" />
+      <ToastContainer role="alert" limit={2} />
       <CssBaseline />
       <Router>
         <Header />
@@ -29,9 +32,9 @@ export default function App() {
             <Gameboard />
           </Route>
         </Switch>
-        {/* <div>
+        <div>
           <Link to="/home">Home</Link>
-        </div> */}
+        </div>
       </Router>
     </ThemeProvider>
   );
