@@ -9,21 +9,23 @@ const Menu = (props) => {
       display="inline-flex"
       justifyContent="space-around"
       width="100%"
-      paddingBottom="1em"
+      paddingTop="2em"
     >
       <Button
-        variant="filled"
-        color="default"
+        color="secondary"
+        variant="contained"
         onClick={() => props.resetGame()}
         startIcon={<FaStar />}
+        disableElevation
       >
         New Game
       </Button>
       <Button
-        variant="filled"
-        color="default"
+        color="secondary"
+        variant="contained"
         onClick={() => props.getTrickSuggestion()}
         startIcon={<FaRandom />}
+        disableElevation
       >
         Random Trick
       </Button>

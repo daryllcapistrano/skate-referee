@@ -7,9 +7,29 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    type: "light",
+    primary: {
+      light: "#9d46ff",
+      main: "#6200ea",
+      dark: "#0a00b6",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#ff9e40",
+      main: "#ff6d00",
+      dark: "#c43c00",
+      contrastText: "#fff",
+    },
+  },
+});
+
 export default function App() {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <ToastContainer role="alert" />
       <CssBaseline />
       {/* <Header /> */}
@@ -23,6 +43,6 @@ export default function App() {
           </Route>
         </Switch>
       </Router>
-    </>
+    </ThemeProvider>
   );
 }

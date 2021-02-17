@@ -12,26 +12,24 @@ export default function Landing() {
         <img
           src={Image}
           alt="skaters skating"
-          style={{ width: `100vw`, maxHeight: `66vh`, padding: `1.5em` }}
+          style={{
+            width: `100vw`,
+            maxHeight: `66vh`,
+            padding: `1.5em`,
+          }}
         />
-        <Box marginX={2} marginTop={6}>
+        <Box margin="auto" maxWidth="90%" width="400px">
           <Button
             component={Link}
             to="/home"
             variant="contained"
-            color="primary"
-            size="large"
+            color="secondary"
+            size="small"
             fullWidth={true}
           >
-            GO
+            <p>GO</p>
           </Button>
         </Box>
-
-        {/* <Box position="absolute" bottom="0" justifyContent="center">
-          <a href="https://www.freepik.com/vectors/woman">
-            Woman vector created by pch.vector - www.freepik.com
-          </a>
-        </Box> */}
       </Box>
     </>
   );

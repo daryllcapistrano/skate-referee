@@ -8,12 +8,10 @@ export default function Announcer(props) {
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
-      height="20em"
       marginBottom={4}
       paddingY={4}
       textAlign="center"
     >
-      <h3>{props.playerTurn}'s turn</h3>
       <Box display="inline-flex" justifyContent="space-around">
         <Scoreboard playerOne={props.playerOne} />
         <Scoreboard playerTwo={props.playerTwo} />
@@ -22,11 +20,12 @@ export default function Announcer(props) {
         <h4>{props.playerOneName}</h4>
         <h4>{props.playerTwoName}</h4>
       </Box>
+      <h3>{props.playerTurn}'s turn</h3>
       <Box>{props.winner}</Box>
       {trickSuggestion ? (
         <Box>{trickSuggestion}</Box>
       ) : (
-        <Box>99% of games start with a kickflip</Box>
+        <Box>Try a kickflip to start the game</Box>
       )}
     </Box>
   );

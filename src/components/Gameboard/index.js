@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Box, Chip, Container, TextField } from "@material-ui/core";
+import { Box, IconButton, TextField } from "@material-ui/core";
 import { trick, stance } from "../../data/tricks";
 import { Landed, Bailed } from "../ToastOptions";
 import { Announcer } from "../Displays";
 import Menu from "../Menu";
+import { FaRegThumbsUp, FaRegThumbsDown, FaUndoAlt } from "react-icons/fa";
 
 export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
@@ -89,7 +90,8 @@ export default function Gameboard() {
   };
 
   return (
-    <Container disableGutters={true}>
+    <>
+      <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
       <Announcer
         playerOne={playerOne}
         playerOneName={playerOneName}
@@ -99,21 +101,18 @@ export default function Gameboard() {
         playerTurn={playerTurn}
         suggestedTrick={suggestedTrick}
       />
-      <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
       <Box
         id="playerOne"
         margin={2}
         padding={2}
-        bgcolor="white"
-        boxShadow=" 0 4px 16px 0 rgba( 31, 38, 135, 0.37 )"
-        borderRadius={4}
+        bgcolor="#f0f0f0"
+        borderRadius={10}
       >
         <TextField
           id="player-one"
           placeholder="Enter Player One's Name"
-          variant="filled"
-          color="primary"
-          margin="normal"
+          // variant="filled"
+          margin="none"
           fullWidth={true}
           onChange={(event) => setPlayerOneName(event.target.value)}
         />
@@ -123,45 +122,45 @@ export default function Gameboard() {
           width="100%"
           mt="1.5em"
         >
-          <Chip
+          <IconButton
             variant="outlined"
-            size="medium"
             label="LAND"
             disabled={disabled}
             onClick={landedPlayerOne}
-            clickable
-          />
-          <Chip
+          >
+            <FaRegThumbsUp />
+          </IconButton>
+          <IconButton
+            variant="outlined"
+            size="medium"
+            label="UNDO"
+            onClick={undoPlayerOne}
+          >
+            <FaUndoAlt />
+          </IconButton>
+          <IconButton
             variant="outlined"
             size="medium"
             label="BAIL"
             disabled={disabled}
             onClick={missedPlayerOne}
-            clickable
-          />
-          <Chip
-            variant="outlined"
-            size="medium"
-            label="UNDO"
-            onClick={undoPlayerOne}
-            clickable
-          />
+          >
+            <FaRegThumbsDown />
+          </IconButton>
         </Box>
       </Box>
       <Box
         id="playerTwo"
         margin={2}
         padding={2}
-        bgcolor="white"
-        boxShadow=" 0 4px 16px 0 rgba( 31, 38, 135, 0.37 )"
-        borderRadius={4}
+        bgcolor="#f0f0f0"
+        borderRadius={10}
       >
         <TextField
           id="player-two"
           placeholder="Enter Player Two's Name"
-          variant="filled"
-          color="primary"
-          margin="normal"
+          // variant="filled"
+          margin="none"
           fullWidth={true}
           onChange={(event) => setPlayerTwoName(event.target.value)}
         />
@@ -171,32 +170,33 @@ export default function Gameboard() {
           width="100%"
           mt="1.5em"
         >
-          <Chip
+          <IconButton
             variant="outlined"
-            size="medium"
             label="LAND"
             disabled={disabled}
             onClick={landedPlayerTwo}
-            clickable
-          />
-          <Chip
+          >
+            <FaRegThumbsUp />
+          </IconButton>
+          <IconButton
+            variant="outlined"
+            size="medium"
+            label="UNDO"
+            onClick={undoPlayerTwo}
+          >
+            <FaUndoAlt />
+          </IconButton>
+          <IconButton
             variant="outlined"
             size="medium"
             label="BAIL"
             disabled={disabled}
             onClick={missedPlayerTwo}
-            clickable
-          />
-          <Chip
-            variant="outlined"
-            size="medium"
-            label="UNDO"
-            onClick={undoPlayerTwo}
-            clickable
-          />
+          >
+            <FaRegThumbsDown />
+          </IconButton>
         </Box>
       </Box>
-      {/* <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} /> */}
-    </Container>
+    </>
   );
 }
