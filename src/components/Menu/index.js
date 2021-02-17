@@ -1,30 +1,29 @@
 // import { useState } from "react";
 // import { trick, stance } from "../data/tricks";
 import { Box, Button } from "@material-ui/core";
-
 import { FaRandom, FaStar } from "react-icons/fa";
 
 const Menu = (props) => {
   return (
     <Box
       display="inline-flex"
-      justifyContent="space-evenly"
+      justifyContent="space-around"
       width="100%"
-      my="2em"
+      paddingBottom="1em"
     >
       <Button
+        variant="filled"
         color="default"
         onClick={() => props.resetGame()}
         startIcon={<FaStar />}
-        size="small"
       >
         New Game
       </Button>
       <Button
+        variant="filled"
         color="default"
         onClick={() => props.getTrickSuggestion()}
         startIcon={<FaRandom />}
-        size="small"
       >
         Random Trick
       </Button>

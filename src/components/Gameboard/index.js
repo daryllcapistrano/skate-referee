@@ -5,8 +5,6 @@ import { Landed, Bailed } from "../ToastOptions";
 import { Announcer } from "../Displays";
 import Menu from "../Menu";
 
-import { grey } from "@material-ui/core/colors";
-
 export default function Gameboard() {
   const [playerOne, setPlayerOne] = useState(0);
   const [playerTwo, setPlayerTwo] = useState(0);
@@ -92,7 +90,6 @@ export default function Gameboard() {
 
   return (
     <Container disableGutters={true}>
-      <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
       <Announcer
         playerOne={playerOne}
         playerOneName={playerOneName}
@@ -102,12 +99,14 @@ export default function Gameboard() {
         playerTurn={playerTurn}
         suggestedTrick={suggestedTrick}
       />
+      <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
       <Box
         id="playerOne"
         margin={2}
         padding={2}
-        bgcolor={grey.A400}
-        borderRadius={8}
+        bgcolor="white"
+        boxShadow=" 0 4px 16px 0 rgba( 31, 38, 135, 0.37 )"
+        borderRadius={4}
       >
         <TextField
           id="player-one"
@@ -153,8 +152,9 @@ export default function Gameboard() {
         id="playerTwo"
         margin={2}
         padding={2}
-        bgcolor={grey.A400}
-        borderRadius={8}
+        bgcolor="white"
+        boxShadow=" 0 4px 16px 0 rgba( 31, 38, 135, 0.37 )"
+        borderRadius={4}
       >
         <TextField
           id="player-two"
@@ -196,6 +196,7 @@ export default function Gameboard() {
           />
         </Box>
       </Box>
+      {/* <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} /> */}
     </Container>
   );
 }
