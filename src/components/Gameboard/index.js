@@ -1,19 +1,27 @@
 import { useState } from "react";
-import { Box, IconButton, TextField } from "@material-ui/core";
-import { trick, stance } from "../../data/tricks";
-import { Landed, Bailed } from "../ToastOptions";
-import { Announcer } from "../Displays";
 import Menu from "../Menu";
+import { Announcer } from "../Displays";
+import { Landed, Bailed } from "../ToastOptions";
+import { trick, stance } from "../../data/tricks";
+import { Box, IconButton, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
 import { FaRegThumbsUp, FaRegThumbsDown, FaUndoAlt } from "react-icons/fa";
 
-export default function Gameboard() {
-  const [playerOne, setPlayerOne] = useState(0);
-  const [playerTwo, setPlayerTwo] = useState(0);
+const useStyles = makeStyles({
+  root: {
+    maxWidth: "600px",
+    margin: "auto",
+  },
+});
+
+const Gameboard = () => {
   const [playerOneName, setPlayerOneName] = useState("Player One");
   const [playerTwoName, setPlayerTwoName] = useState("Player Two");
   const [playerTurn, setPlayerTurn] = useState(playerOneName);
   const [suggestedTrick, setSuggestedTrick] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [playerOne, setPlayerOne] = useState(0);
+  const [playerTwo, setPlayerTwo] = useState(0);
   const [winner, setWinner] = useState(null);
 
   const getTrickSuggestion = () => {
@@ -24,45 +32,46 @@ export default function Gameboard() {
   };
 
   const resetGame = () => {
+    setPlayerOneName("Player One");
+    setPlayerTwoName("Player Two");
+    setPlayerTurn(playerOneName);
+    setSuggestedTrick(null);
+    setDisabled(false);
     setPlayerOne(0);
     setPlayerTwo(0);
-    setDisabled(false);
     setWinner(null);
-    setSuggestedTrick(null);
-    setPlayerTurn(playerOneName);
   };
 
   const landedPlayerOne = () => {
     setPlayerTurn(playerTwoName);
     Landed();
-    return null;
   };
 
   const landedPlayerTwo = () => {
     setPlayerTurn(playerOneName);
     Landed();
-    return null;
   };
 
   const missedPlayerOne = () => {
     if (playerOne === 4) {
+      setWinner(playerTwoName + " won!");
       setPlayerOne(playerOne + 1);
       setDisabled(true);
-      setWinner(playerTwoName + " won!");
     } else {
-      setPlayerOne(playerOne + 1);
       setPlayerTurn(playerTwoName);
+      setPlayerOne(playerOne + 1);
       Bailed();
     }
   };
+
   const missedPlayerTwo = () => {
     if (playerTwo === 4) {
+      setWinner(playerOneName + " won!");
       setPlayerTwo(playerTwo + 1);
       setDisabled(true);
-      setWinner(playerOneName + " won!");
     } else {
-      setPlayerTwo(playerTwo + 1);
       setPlayerTurn(playerOneName);
+      setPlayerTwo(playerTwo + 1);
       Bailed();
     }
   };
@@ -72,8 +81,8 @@ export default function Gameboard() {
       return null;
     } else {
       setPlayerOne(playerOne - 1);
-      setDisabled(false);
       setPlayerTurn(playerOneName);
+      setDisabled(false);
       setWinner(null);
     }
   };
@@ -83,14 +92,16 @@ export default function Gameboard() {
       return null;
     } else {
       setPlayerTwo(playerTwo - 1);
-      setDisabled(false);
       setPlayerTurn(playerTwoName);
+      setDisabled(false);
       setWinner(null);
     }
   };
 
+  const classes = useStyles();
+
   return (
-    <>
+    <div className={classes.root}>
       <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
       <Announcer
         playerOne={playerOne}
@@ -106,12 +117,11 @@ export default function Gameboard() {
         margin={2}
         padding={2}
         bgcolor="#f0f0f0"
-        borderRadius={10}
+        borderRadius={4}
       >
         <TextField
           id="player-one"
           placeholder="Enter Player One's Name"
-          // variant="filled"
           margin="none"
           fullWidth={true}
           onChange={(event) => setPlayerOneName(event.target.value)}
@@ -154,12 +164,11 @@ export default function Gameboard() {
         margin={2}
         padding={2}
         bgcolor="#f0f0f0"
-        borderRadius={10}
+        borderRadius={4}
       >
         <TextField
           id="player-two"
           placeholder="Enter Player Two's Name"
-          // variant="filled"
           margin="none"
           fullWidth={true}
           onChange={(event) => setPlayerTwoName(event.target.value)}
@@ -197,6 +206,8 @@ export default function Gameboard() {
           </IconButton>
         </Box>
       </Box>
-    </>
+    </div>
   );
-}
+};
+
+export default Gameboard;

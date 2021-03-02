@@ -1,32 +1,63 @@
-import { Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import { Box, Paper } from "@material-ui/core";
 import Scoreboard from "./Scoreboard";
 
-export default function Announcer(props) {
+const useStyles = makeStyles({
+  root: {
+    display: "flex",
+    textAlign: "center",
+    flexDirection: "column",
+    backgroundColor: "#fff",
+    justifyContent: "space-between",
+    margin: "2em 1.25em",
+  },
+  playerTurn: {
+    color: "grey",
+    fontSize: "1em",
+  },
+  winnerText: {
+    margin: "auto",
+    paddingTop: "1em",
+  },
+  text: {
+    width: "9em",
+    fontSize: "1.5em",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  trickText: {
+    textTransform: "uppercase",
+  },
+  flex: {
+    display: "inline-flex",
+    justifyContent: "space-around",
+  },
+});
+
+const Announcer = (props) => {
+  const classes = useStyles();
   const trickSuggestion = props.suggestedTrick;
+
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="space-between"
-      marginBottom={4}
-      paddingY={4}
-      textAlign="center"
-    >
-      <Box display="inline-flex" justifyContent="space-around">
+    <Paper className={classes.root} elevation={3}>
+      <p className={classes.winnerText}>{props.winner}</p>
+      <Box className={classes.flex}>
         <Scoreboard playerOne={props.playerOne} />
         <Scoreboard playerTwo={props.playerTwo} />
       </Box>
-      <Box display="inline-flex" justifyContent="space-around">
-        <h4>{props.playerOneName}</h4>
-        <h4>{props.playerTwoName}</h4>
+      <Box className={classes.flex}>
+        <p className={classes.text}>{props.playerOneName}</p>
+        <p>vs</p>
+        <p className={classes.text}>{props.playerTwoName}</p>
       </Box>
-      <h3>{props.playerTurn}'s turn</h3>
-      <Box>{props.winner}</Box>
+      <p className={classes.playerTurn}>{props.playerTurn}'s turn to try:</p>
       {trickSuggestion ? (
-        <Box>{trickSuggestion}</Box>
+        <p className={classes.trickText}>{trickSuggestion}</p>
       ) : (
-        <Box>Try a kickflip to start the game</Box>
+        <p>kickflip or get a random trick</p>
       )}
-    </Box>
+    </Paper>
   );
-}
+};
+
+export default Announcer;

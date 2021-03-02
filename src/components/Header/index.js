@@ -1,16 +1,31 @@
-import { AppBar, Box, Container, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import { IconContext } from "react-icons";
+import { GiWhistle } from "react-icons/gi";
 
-export default function Header() {
+const useStyles = makeStyles({
+  title: {
+    textTransform: "uppercase",
+    fontSize: "2.5em",
+    margin: ".2em",
+    marginLeft: ".5em",
+    color: "#ffeb3b",
+  },
+});
+
+function Header() {
+  const classes = useStyles();
+
   return (
-    <AppBar position="static" elevation={0} color="transparent">
+    <AppBar position="static" elevation={1} color="primary">
       <Toolbar variant="dense">
-        <Container>SKATE REFEREE</Container>
-        <Box
-          display="inline-flex"
-          justifyContent="space-around"
-          width="100%"
-        ></Box>
+        <IconContext.Provider value={{ color: "#ffeb3b", size: "3em" }}>
+          <GiWhistle />
+        </IconContext.Provider>
+        <h1 className={classes.title}>skate referee</h1>
       </Toolbar>
     </AppBar>
   );
 }
+
+export default Header;
