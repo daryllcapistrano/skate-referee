@@ -8,11 +8,17 @@ const useStyles = makeStyles({
   root: {
     maxWidth: "600px",
     margin: "auto",
-    paddingTop: "2em",
+    padding: ".5em 1em",
   },
   image: {
     width: "100%",
-    padding: "1em",
+    borderRadius: "5px",
+    marginBottom: "1em",
+  },
+  text: {
+    fontWeight: "bold",
+    fontSize: "150%",
+    margin: "0",
   },
 });
 
@@ -21,24 +27,22 @@ const Landing = () => {
 
   return (
     <Box textAlign="center" className={classes.root}>
+      <h1>Keep track of your game and focus on ripping!</h1>
       <img
         className={classes.image}
         src={SkatersInSkatepark}
         alt="skaters skating"
       />
-      <p>Keep track of your game and focus on ripping!</p>
-      <Box margin="auto" maxWidth="90%" width="400px">
-        <Button
-          component={Link}
-          to="/home"
-          variant="contained"
-          color="secondary"
-          size="small"
-          fullWidth={true}
-        >
-          <p>GO</p>
-        </Button>
-      </Box>
+      <Button
+        component={Link}
+        to="/home"
+        variant="contained"
+        color="secondary"
+        size="small"
+        fullWidth={true}
+      >
+        <p className={classes.text}>GO</p>
+      </Button>
     </Box>
   );
 };

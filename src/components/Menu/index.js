@@ -7,7 +7,7 @@ const Menu = (props) => {
       width="100%"
       paddingTop="2em"
       display="inline-flex"
-      justifyContent="space-around"
+      justifyContent="space-evenly"
     >
       <Button
         color="secondary"
