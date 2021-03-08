@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Menu from "../Menu";
-import { Announcer } from "../Displays";
-import { Landed, Bailed } from "../ToastOptions";
-import { trick, stance } from "../../data/tricks";
-import { Box, IconButton, TextField } from "@material-ui/core";
+import Menu from "../../components/Menu";
+import Display from "../../components/Display";
 import { makeStyles } from "@material-ui/styles";
+import { trick, stance } from "../../data/tricks";
+import { Landed, Bailed } from "../../utils/ToastOptions";
+import { Box, IconButton, TextField } from "@material-ui/core";
 import { FaRegThumbsUp, FaRegThumbsDown, FaUndoAlt } from "react-icons/fa";
 
 const useStyles = makeStyles({
@@ -103,11 +103,11 @@ const Gameboard = () => {
   return (
     <div className={classes.root}>
       <Menu resetGame={resetGame} getTrickSuggestion={getTrickSuggestion} />
-      <Announcer
-        playerOne={playerOne}
-        playerOneName={playerOneName}
-        playerTwo={playerTwo}
+      <Display
         playerTwoName={playerTwoName}
+        playerOneName={playerOneName}
+        playerOne={playerOne}
+        playerTwo={playerTwo}
         winner={winner}
         playerTurn={playerTurn}
         suggestedTrick={suggestedTrick}

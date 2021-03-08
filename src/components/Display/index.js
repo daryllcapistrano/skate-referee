@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 import { Box, Paper } from "@material-ui/core";
-import Scoreboard from "./Scoreboard";
+import Scoreboard from "../Scoreboard";
 
 const useStyles = makeStyles({
   root: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Announcer = (props) => {
+const Display = (props) => {
   const classes = useStyles();
   const trickSuggestion = props.suggestedTrick;
 
@@ -60,4 +60,4 @@ const Announcer = (props) => {
   );
 };
 
-export default Announcer;
+export default Display;

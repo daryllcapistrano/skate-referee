@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Landing from "./components/Landing";
-import Gameboard from "./components/Gameboard";
+import Landing from "./pages/Landing";
+import Gameboard from "./pages/Gameboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import CssBaseline from "@material-ui/core/CssBaseline";

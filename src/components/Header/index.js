@@ -4,12 +4,13 @@ import { IconContext } from "react-icons";
 import { GiWhistle } from "react-icons/gi";
 
 const useStyles = makeStyles({
+  center: { alignSelf: "center" },
   title: {
-    textTransform: "uppercase",
-    fontSize: "2.5em",
+    color: "#ffeb3b",
     margin: ".2em",
     marginLeft: ".5em",
-    color: "#ffeb3b",
+    fontSize: "2.5em",
+    textTransform: "uppercase",
   },
 });
 
@@ -18,7 +19,7 @@ function Header() {
 
   return (
     <AppBar position="static" elevation={1} color="primary">
-      <Toolbar variant="dense">
+      <Toolbar variant="dense" className={classes.center}>
         <IconContext.Provider value={{ color: "#ffeb3b", size: "3em" }}>
           <GiWhistle />
         </IconContext.Provider>
