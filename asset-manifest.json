@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/skate-referee/static/css/main.76424e74.chunk.css",
+    "main.js": "/skate-referee/static/js/main.072dcbaf.chunk.js",
+    "main.js.map": "/skate-referee/static/js/main.072dcbaf.chunk.js.map",
+    "runtime-main.js": "/skate-referee/static/js/runtime-main.f9891205.js",
+    "runtime-main.js.map": "/skate-referee/static/js/runtime-main.f9891205.js.map",
+    "static/css/2.82a37e40.chunk.css": "/skate-referee/static/css/2.82a37e40.chunk.css",
+    "static/js/2.3e43d855.chunk.js": "/skate-referee/static/js/2.3e43d855.chunk.js",
+    "static/js/2.3e43d855.chunk.js.map": "/skate-referee/static/js/2.3e43d855.chunk.js.map",
+    "static/js/3.376de577.chunk.js": "/skate-referee/static/js/3.376de577.chunk.js",
+    "static/js/3.376de577.chunk.js.map": "/skate-referee/static/js/3.376de577.chunk.js.map",
+    "index.html": "/skate-referee/index.html",
+    "static/css/2.82a37e40.chunk.css.map": "/skate-referee/static/css/2.82a37e40.chunk.css.map",
+    "static/css/main.76424e74.chunk.css.map": "/skate-referee/static/css/main.76424e74.chunk.css.map",
+    "static/js/2.3e43d855.chunk.js.LICENSE.txt": "/skate-referee/static/js/2.3e43d855.chunk.js.LICENSE.txt",
+    "static/media/skaters-in-skatepark.04d5a51f.svg": "/skate-referee/static/media/skaters-in-skatepark.04d5a51f.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f9891205.js",
+    "static/css/2.82a37e40.chunk.css",
+    "static/js/2.3e43d855.chunk.js",
+    "static/css/main.76424e74.chunk.css",
+    "static/js/main.072dcbaf.chunk.js"
+  ]
+}
