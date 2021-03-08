@@ -2,7 +2,7 @@
   "name": "skate-referee",
   "description": "Score keeper for a game of S.K.A.T.E.",
   "author": "Daryll Capistrano",
-  "homepage": "https://github.com/daryllcapistrano/skate-referee",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
