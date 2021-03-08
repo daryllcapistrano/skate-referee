@@ -2,7 +2,7 @@
   "name": "skate-referee",
   "description": "Score keeper for a game of S.K.A.T.E.",
   "author": "Daryll Capistrano",
-  "homepage": ".",
+  "homepage": "https://daryllcapistrano.github.io/skate-referee",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
+    "gh-pages": "^3.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
@@ -20,6 +21,8 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
