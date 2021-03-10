@@ -1,6 +1,6 @@
 # SKATE REFEREE
 
-This App will keep track of your score as you focus on beating your opponent in a game of S.K.A.T.E.
+Keep track of your score as you focus on beating your opponent in a game of S.K.A.T.E.
 
 Features a Random Trick Generator so you will never get stuck thinking about what to try.
 
